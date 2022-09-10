@@ -16,6 +16,10 @@ type Query {
   findOneById(id: ID!): Todo!
 }
 
+type Subscription {
+  todoAdded: Todo!
+}
+
 type Todo {
   createdAt: DateTime!
   description: String

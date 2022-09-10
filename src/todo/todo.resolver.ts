@@ -1,8 +1,10 @@
-// src/todo/todo.resolver.ts
-import { Args, ID, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Args, ID, Mutation, Query, Resolver, Subscription } from "@nestjs/graphql";
+import { PubSub } from "graphql-subscriptions";
 
 import { Todo } from "./models/todo.models";
 import { TodoService } from "./todo.service";
+
+const pubSub = new PubSub();
 
 @Resolver()
 export class TodoResolver {
@@ -20,6 +22,13 @@ export class TodoResolver {
 
   @Mutation(() => Todo)
   async insertTodo(@Args("id", { type: () => ID }) id: string) {
-    return this.todoService.insertTodo(id);
+    const newTodo = this.todoService.insertTodo(id);
+    pubSub.publish("insertTodo", { todoAdded: newTodo });
+    return newTodo;
+  }
+
+  @Subscription(() => Todo)
+  todoAdded() {
+    return pubSub.asyncIterator("insertTodo");
   }
 }

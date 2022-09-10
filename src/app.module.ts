@@ -14,6 +14,7 @@ import { TodoModule } from "./todo/todo.module";
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
       driver: ApolloDriver,
+      installSubscriptionHandlers: true,
       sortSchema: true,
     }),
     TodoModule,
