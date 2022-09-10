@@ -15,14 +15,8 @@ type Query {
 type Todo {
   createdAt: DateTime!
   description: String
-  id: ID!
-  status: TodoStatus!
+  id: String!
+  status: Float!
   title: String!
   updatedAt: DateTime!
-}
-
-enum TodoStatus {
-  COMPLETE
-  IN_PROGRESS
-  NEW
 }

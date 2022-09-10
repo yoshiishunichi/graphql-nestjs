@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType, registerEnumType } from "@nestjs/graphql";
+import { Field, ObjectType, registerEnumType } from "@nestjs/graphql";
 
 export enum TodoStatus {
   NEW,
@@ -12,7 +12,7 @@ registerEnumType(TodoStatus, {
 
 @ObjectType()
 export class Todo {
-  @Field((type) => ID)
+  @Field()
   id: string;
 
   @Field()
@@ -21,7 +21,7 @@ export class Todo {
   @Field({ nullable: true })
   description: string;
 
-  @Field((type) => TodoStatus)
+  @Field()
   status: TodoStatus;
 
   @Field()
