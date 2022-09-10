@@ -34,4 +34,16 @@ export class TodoService {
     }
     return result;
   }
+  insertTodo(id: string): Todo {
+    const todo: Todo = {
+      createdAt: new Date(),
+      description: "new description",
+      id,
+      status: 2,
+      title: "new title",
+      updatedAt: new Date(),
+    };
+    this.todos.push(todo);
+    return todo;
+  }
 }
